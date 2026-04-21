@@ -52,7 +52,7 @@ body {
     100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* 🧠 layout */
+/* 🧠 content */
 .container {
     position: relative;
     z-index: 2;
@@ -87,7 +87,7 @@ p {
     margin-top: 60px;
 }
 
-/* 🖼 DESKTOP floating photos */
+/* 🖼 DESKTOP FLOATING PHOTOS */
 .photo {
     position: absolute;
     width: 140px;
@@ -105,10 +105,10 @@ p {
     object-fit: cover;
 }
 
-.photo:nth-child(1){ top: 12%; left: 5%; }
-.photo:nth-child(2){ top: 22%; right: 8%; animation-duration: 12s; }
-.photo:nth-child(3){ top: 55%; left: 10%; animation-duration: 11s; }
-.photo:nth-child(4){ top: 65%; right: 12%; animation-duration: 13s; }
+.photo:nth-of-type(1){ top: 12%; left: 5%; }
+.photo:nth-of-type(2){ top: 22%; right: 8%; animation-duration: 12s; }
+.photo:nth-of-type(3){ top: 55%; left: 10%; animation-duration: 11s; }
+.photo:nth-of-type(4){ top: 65%; right: 12%; animation-duration: 13s; }
 
 @keyframes floatPhoto {
     0% { transform: translateY(0px); }
@@ -116,7 +116,7 @@ p {
     100% { transform: translateY(0px); }
 }
 
-/* 💧 RIPPLE EFFECT */
+/* 💧 ripple */
 .ripple {
     position: fixed;
     border-radius: 50%;
@@ -135,29 +135,24 @@ p {
     }
 }
 
-/* 📱 MOBILE */
+/* 📱 MOBILE = gallery mode */
 @media (max-width: 768px) {
 
     .container {
         padding: 90px 16px;
     }
 
-    h1 {
-        font-size: 22px;
-    }
-
-    p {
-        font-size: 15px;
-    }
+    h1 { font-size: 22px; }
+    p { font-size: 15px; }
 
     .card {
         font-size: 14px;
         padding: 14px 16px;
     }
 
-    /* photos become clean gallery */
+    /* 📱 отключаем плавающий режим */
     .photo {
-        position: static;
+        position: relative;
         display: block;
         width: 100%;
         max-width: 320px;
@@ -230,12 +225,9 @@ for(let i=0;i<25;i++){
     document.body.appendChild(p);
 }
 
-/* 💧 ripple (tap / click) */
-document.addEventListener("click", function(e) {
-    createRipple(e.clientX, e.clientY);
-});
-
-document.addEventListener("touchstart", function(e) {
+/* 💧 ripple */
+document.addEventListener("click", createRipple);
+document.addEventListener("touchstart", function(e){
     const t = e.touches[0];
     createRipple(t.clientX, t.clientY);
 });
